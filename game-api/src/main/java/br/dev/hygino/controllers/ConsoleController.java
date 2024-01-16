@@ -29,8 +29,13 @@ public class ConsoleController {
         return ResponseEntity.status(HttpStatus.OK).body(this.consoleService.findAll(pageable));
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable String id) {
         return this.consoleService.findById(id);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateById(@PathVariable String id, @RequestBody @Valid ConsoleInsertDTO dto) {
+        return this.consoleService.updateById(id, dto);
     }
 }

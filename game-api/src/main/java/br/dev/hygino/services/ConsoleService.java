@@ -12,4 +12,6 @@ public interface ConsoleService {
     Page<ConsoleDTO> findAll(Pageable pageable);
 
     ResponseEntity<?> findById(String id);
+
+    ResponseEntity<?> updateById(String id, ConsoleInsertDTO dto);
 }
