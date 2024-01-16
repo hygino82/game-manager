@@ -30,6 +30,8 @@ public class Console implements Serializable {
     @NotNull
     Short releaseYear;
 
+    private String imgUrl;
+
     private Instant createdAt;
     private Instant updatedAt;
 
@@ -67,6 +69,14 @@ public class Console implements Serializable {
 
     public void setReleaseYear(Short releaseYear) {
         this.releaseYear = releaseYear;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public Instant getCreatedAt() {

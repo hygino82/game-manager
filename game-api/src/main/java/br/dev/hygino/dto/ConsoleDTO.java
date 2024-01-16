@@ -11,10 +11,11 @@ public record ConsoleDTO(
         String id,
         String name,
         Short releaseYear,
+        String imgUrl,
         Instant createdAt,
         Instant updatedAt
 ) {
     public ConsoleDTO(Console entity) {
-        this(entity.getId(), entity.getName(), entity.getReleaseYear(), entity.getCreatedAt(), entity.getUpdatedAt());
+        this(entity.getId(), entity.getName(), entity.getReleaseYear(), entity.getImgUrl(), entity.getCreatedAt(), entity.getUpdatedAt());
     }
 }
