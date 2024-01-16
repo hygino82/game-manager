@@ -28,4 +28,9 @@ public class ConsoleController {
     public ResponseEntity<Page<ConsoleDTO>> findAll(Pageable pageable) {
         return ResponseEntity.status(HttpStatus.OK).body(this.consoleService.findAll(pageable));
     }
+
+    @GetMapping("{id}")
+    public ResponseEntity<?> findById(@PathVariable String id) {
+        return this.consoleService.findById(id);
+    }
 }
