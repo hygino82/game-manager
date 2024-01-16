@@ -38,4 +38,10 @@ public class ConsoleController {
     public ResponseEntity<?> updateById(@PathVariable String id, @RequestBody @Valid ConsoleInsertDTO dto) {
         return this.consoleService.updateById(id, dto);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> remove(@PathVariable String id) {
+        this.consoleService.remove(id);
+        return ResponseEntity.noContent().build();
+    }
 }

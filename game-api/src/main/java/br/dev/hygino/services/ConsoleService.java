@@ -14,4 +14,6 @@ public interface ConsoleService {
     ResponseEntity<?> findById(String id);
 
     ResponseEntity<?> updateById(String id, ConsoleInsertDTO dto);
+
+    void remove(String id);
 }

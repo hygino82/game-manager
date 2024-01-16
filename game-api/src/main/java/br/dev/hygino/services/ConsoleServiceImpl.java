@@ -51,12 +51,10 @@ public class ConsoleServiceImpl implements ConsoleService {
     @Transactional
     public ResponseEntity<?> updateById(String id, ConsoleInsertDTO dto) {
         try {
-            Console res = this.consoleRepository.getReferenceById(id);
-            var entity = this.consoleRepository.save(copyDtoToEntity(dto, res));
+            Console entity = this.consoleRepository.getReferenceById(id);
+            entity = this.consoleRepository.save(copyDtoToEntity(dto, entity));
             return ResponseEntity.status(HttpStatus.OK).body(new ConsoleDTO(entity));
-        }/* catch (LazyInitializationException e) {
-            return ResponseEntity.status(500).body("Ocorreu um erro interno!");
-        } */ catch (EntityNotFoundException e) {
+        } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não existe console com o id: " + id);
         }
     }
@@ -67,5 +65,10 @@ public class ConsoleServiceImpl implements ConsoleService {
         entity.setImgUrl(dto.imgUrl());
         entity.setUpdatedAt(Instant.now());
         return entity;
+    }
+
+    @Override
+    public void remove(String id) {
+        this.consoleRepository.deleteById(id);
     }
 }
