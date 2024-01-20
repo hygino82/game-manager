@@ -1,11 +1,8 @@
 package br.dev.hygino.dto;
 
-import br.dev.hygino.entities.Console;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-
 import java.time.Instant;
+
+import br.dev.hygino.entities.Console;
 
 public record ConsoleDTO(
         String id,
