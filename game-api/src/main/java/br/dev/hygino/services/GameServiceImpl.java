@@ -74,12 +74,14 @@ public class GameServiceImpl implements GameService {
 			Console consoleEntity = this.consoleRepository.findById(dto.consoleId())
 					.orElseThrow(() -> new IllegalArgumentException("Não existe console com o id: " + dto.consoleId()));
 			gameEntity = dtoToEntity(dto, gameEntity, consoleEntity);
+			gameEntity = this.gameRepository.save(gameEntity);
 			return ResponseEntity.status(200).body(new GameDTO(gameEntity));
 		} catch (EntityNotFoundException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("Não é possível atualizar o jogo com o id: " + id);
 		} catch (IllegalArgumentException e) {
-			return ResponseEntity.status(500).body("Impossível atualizar, pois não existe console com o id: " + dto.consoleId());
+			return ResponseEntity.status(500)
+					.body("Impossível atualizar, pois não existe console com o id: " + dto.consoleId());
 		}
 	}
 
