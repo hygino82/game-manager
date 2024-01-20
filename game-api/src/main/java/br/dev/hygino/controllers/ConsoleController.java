@@ -13,35 +13,35 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/v1/console")
 public class ConsoleController {
-    private final ConsoleService consoleService;
+	private final ConsoleService consoleService;
 
-    public ConsoleController(ConsoleService consoleService) {
-        this.consoleService = consoleService;
-    }
+	public ConsoleController(ConsoleService consoleService) {
+		this.consoleService = consoleService;
+	}
 
-    @PostMapping
-    public ResponseEntity<ConsoleDTO> insert(@RequestBody @Valid ConsoleInsertDTO dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.consoleService.insert(dto));
-    }
+	@PostMapping
+	public ResponseEntity<ConsoleDTO> insert(@RequestBody @Valid ConsoleInsertDTO dto) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(this.consoleService.insert(dto));
+	}
 
-    @GetMapping
-    public ResponseEntity<Page<ConsoleDTO>> findAll(Pageable pageable) {
-        return ResponseEntity.status(HttpStatus.OK).body(this.consoleService.findAll(pageable));
-    }
+	@GetMapping
+	public ResponseEntity<Page<ConsoleDTO>> findAll(Pageable pageable) {
+		return ResponseEntity.status(HttpStatus.OK).body(this.consoleService.findAll(pageable));
+	}
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable String id) {
-        return this.consoleService.findById(id);
-    }
+	@GetMapping("/{id}")
+	public ResponseEntity<?> findById(@PathVariable String id) {
+		return this.consoleService.findById(id);
+	}
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateById(@PathVariable String id, @RequestBody @Valid ConsoleInsertDTO dto) {
-        return this.consoleService.updateById(id, dto);
-    }
+	@PutMapping("/{id}")
+	public ResponseEntity<?> updateById(@PathVariable String id, @RequestBody @Valid ConsoleInsertDTO dto) {
+		return this.consoleService.updateById(id, dto);
+	}
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> remove(@PathVariable String id) {
-        this.consoleService.remove(id);
-        return ResponseEntity.noContent().build();
-    }
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> remove(@PathVariable String id) {
+		this.consoleService.remove(id);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+	}
 }
