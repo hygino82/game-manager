@@ -15,4 +15,6 @@ public interface GameService {
 	ResponseEntity<?> insert(@Valid GameInsertDTO dto);
 
 	ResponseEntity<?> findById(String id);
+
+	Page<GameDTO> findByConsoleId(Pageable pageable, String id);
 }

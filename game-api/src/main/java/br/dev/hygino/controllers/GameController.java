@@ -40,4 +40,9 @@ public class GameController {
 		return this.gameService.findById(id);
 	}
 
+	@GetMapping("console/{id}")
+	public ResponseEntity<Page<GameDTO>> findByConsoleId(Pageable pageable, @PathVariable String id) {
+		return ResponseEntity.status(200).body(this.gameService.findByConsoleId(pageable, id));
+	}
+
 }

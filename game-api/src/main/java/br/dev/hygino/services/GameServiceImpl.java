@@ -55,4 +55,11 @@ public class GameServiceImpl implements GameService {
 
 		return ResponseEntity.status(404).body("Não existe jogo com o id: " + id);
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<GameDTO> findByConsoleId(Pageable pageable, String id) {
+		Page<Game> page = this.gameRepository.findByConsoleId(pageable, id);
+		return page.map(game -> new GameDTO(game));
+	}
 }
