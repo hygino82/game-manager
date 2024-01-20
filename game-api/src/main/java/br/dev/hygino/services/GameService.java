@@ -17,4 +17,6 @@ public interface GameService {
 	ResponseEntity<?> findById(String id);
 
 	Page<GameDTO> findByConsoleId(Pageable pageable, String id);
+
+	ResponseEntity<?> update(String id, @Valid GameInsertDTO dto);
 }

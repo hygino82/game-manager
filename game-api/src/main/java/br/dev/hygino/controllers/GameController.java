@@ -14,6 +14,7 @@ import br.dev.hygino.dto.GameDTO;
 import br.dev.hygino.dto.GameInsertDTO;
 import br.dev.hygino.services.GameService;
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping("api/v1/game")
@@ -40,9 +41,13 @@ public class GameController {
 		return this.gameService.findById(id);
 	}
 
-	@GetMapping("console/{id}")
+	@GetMapping("/console/{id}")
 	public ResponseEntity<Page<GameDTO>> findByConsoleId(Pageable pageable, @PathVariable String id) {
 		return ResponseEntity.status(200).body(this.gameService.findByConsoleId(pageable, id));
 	}
 
+	@PutMapping("/{id}")
+	public ResponseEntity<?> update(@PathVariable String id, @RequestBody @Valid GameInsertDTO dto) {
+		return this.gameService.update(id, dto);
+	}
 }

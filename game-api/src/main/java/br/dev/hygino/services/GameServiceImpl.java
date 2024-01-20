@@ -1,9 +1,11 @@
 package br.dev.hygino.services;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,7 @@ import br.dev.hygino.entities.Console;
 import br.dev.hygino.entities.Game;
 import br.dev.hygino.repositories.ConsoleRepository;
 import br.dev.hygino.repositories.GameRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 
 @Service
@@ -62,4 +65,32 @@ public class GameServiceImpl implements GameService {
 		Page<Game> page = this.gameRepository.findByConsoleId(pageable, id);
 		return page.map(game -> new GameDTO(game));
 	}
+
+	@Override
+	@Transactional
+	public ResponseEntity<?> update(String id, @Valid GameInsertDTO dto) {
+		try {
+			Game gameEntity = this.gameRepository.getReferenceById(id);
+			Console consoleEntity = this.consoleRepository.findById(dto.consoleId())
+					.orElseThrow(() -> new IllegalArgumentException("Não existe console com o id: " + dto.consoleId()));
+			gameEntity = dtoToEntity(dto, gameEntity, consoleEntity);
+			return ResponseEntity.status(200).body(new GameDTO(gameEntity));
+		} catch (EntityNotFoundException e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body("Não é possível atualizar o jogo com o id: " + id);
+		} catch (IllegalArgumentException e) {
+			return ResponseEntity.status(500).body("Impossível atualizar, pois não existe console com o id: " + dto.consoleId());
+		}
+	}
+
+	private Game dtoToEntity(@Valid GameInsertDTO dto, Game gameEntity, Console consoleEntity) {
+		gameEntity.setName(dto.name());
+		gameEntity.setReleaseYear(dto.releaseYear());
+		gameEntity.setImageUrl(dto.imageUrl());
+		gameEntity.setUpdateDate(new Date());
+		gameEntity.setConsole(consoleEntity);
+		gameEntity.setPersonalCode(dto.personalCode());
+		return gameEntity;
+	}
+
 }
