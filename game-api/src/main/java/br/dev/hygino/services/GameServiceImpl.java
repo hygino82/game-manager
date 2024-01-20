@@ -1,5 +1,7 @@
 package br.dev.hygino.services;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -40,5 +42,17 @@ public class GameServiceImpl implements GameService {
 		Game entity = new Game(dto, console);
 		entity = this.gameRepository.save(entity);
 		return ResponseEntity.status(201).body(new GameDTO(entity));
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public ResponseEntity<?> findById(String id) {
+		Optional<Game> gameOptional = this.gameRepository.findById(id);
+
+		if (gameOptional.isPresent()) {
+			return ResponseEntity.status(200).body(new GameDTO(gameOptional.get()));
+		}
+
+		return ResponseEntity.status(404).body("Não existe jogo com o id: " + id);
 	}
 }
