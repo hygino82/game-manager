@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
 import './index.css';
+import ConsoleCardInfo from './routes/ConsoleCardInfo/index.tsx';
 import ConsoleCardList from './routes/ConsoleCardList/index.tsx';
 import ConsoleForm from './routes/ConsoleForm/index.tsx';
 import ConsoleList from './routes/ConsoleList/index.tsx';
@@ -21,27 +22,31 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "console-insert",
+        path: "console/:id",
+        element: <ConsoleCardInfo />,
+      },
+      {
+        path: "console/insert",
         element: <ConsoleForm />,
       },
       {
-        path: "game-insert",
+        path: "game/insert",
         element: <GameForm />,
       },
       {
-        path: "game-list",
+        path: "game/list",
         element: <GameList />,
       },
       {
-        path: "console-list",
+        path: "console/list",
         element: <ConsoleList />,
       },
       {
-        path: "game-card-list",
+        path: "game/card/list",
         element: <GameCardList />,
       },
       {
-        path: "console-card-list",
+        path: "console/card/list",
         element: <ConsoleCardList />,
       },
     ],

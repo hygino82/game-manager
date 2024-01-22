@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { BASE_URL } from "../../utils/request";
 import { ConsolePageType, ConsoleType } from "../../types/custom-types";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
-export default function ConsoleList(){
+export default function ConsoleList() {
   const [consolePage, setConsolePage] = useState<ConsolePageType>();
 
   const [atualizar, setAtualizar] = useState<boolean>(true);
@@ -13,15 +14,6 @@ export default function ConsoleList(){
     imgUrl: '',
     releaseYear: 0
   })
-
-  function limparCampos() {
-    setPlatform({
-      name: '',
-      imgUrl: '',
-      releaseYear: 0,
-      id: ''
-    });
-  }
 
   useEffect(() => {
     buscarTodos();
@@ -41,46 +33,44 @@ export default function ConsoleList(){
       .catch(() => alert('Não é possível remover um console com jogos vinculados!'));
   }
 
-
-
   return (
     <table className="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Nome</th>
-            <th scope="col">Link da imagem</th>
-            <th scope="col">Lançamento</th>
-            <th scope="col">Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          {consolePage?.content.map(item => {
-            return (
-              <tr key={item.id}>
-                <td>{item.name}</td>
-                <td>{item.imgUrl}</td>
-                <td>{item.releaseYear}</td>
-                <td>
-                  <button
-                    type="submit"
-                    onClick={() => setPlatform(item)}
-                    className="btn btn-primary"
-                  >
-                    Alterar
-                  </button>&nbsp;&nbsp;
-                  <button
-                    type="submit"
-                    onClick={() => handleDelete(item.id)}
-                    className="btn btn-danger"
-                  >
-                    Excluir
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
+      <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Lançamento</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {consolePage?.content.map(item => {
+          return (
+            <tr key={item.id}>
+              <td>{item.name}</td>
+              <td>{item.releaseYear}</td>
+              <td>
+                <Link to={`/console/${item.id}`} className="btn btn-success">Info</Link>
+                &nbsp;&nbsp;
+                <button
+                  type="submit"
+                  onClick={() => setPlatform(item)}
+                  className="btn btn-primary"
+                >
+                  Alterar
+                </button>&nbsp;&nbsp;
+                <button
+                  type="submit"
+                  onClick={() => handleDelete(item.id)}
+                  className="btn btn-danger"
+                >
+                  Excluir
+                </button>
+              </td>
+            </tr>
+          );
+        })}
 
-        </tbody>
-      </table>
+      </tbody>
+    </table>
   );
 }

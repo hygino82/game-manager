@@ -3,6 +3,8 @@ export type ConsoleType = {
   name: string;
   releaseYear?: number;
   imgUrl?: string;
+  createdAt?: string;
+  updatedAt?: string;
 };
 
 export type GameType = {

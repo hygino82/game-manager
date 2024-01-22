@@ -9,33 +9,28 @@ export default function Navbar() {
             </a>
           </li>
           <li className="nav-item active">
-            <a className="nav-link" href="console-insert">
+            <a className="nav-link" href="console/insert">
               Inserir console
             </a>
           </li>
           <li className="nav-item active">
-            <a className="nav-link" href="game-insert">
+            <a className="nav-link" href="game/insert">
               Inserir jogo
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="console-list">
+            <a className="nav-link" href="console/list">
               Listar consoles
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="game-list">
+            <a className="nav-link" href="game/list">
               Listar jogos
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="console-card-list">
+            <a className="nav-link" href="console/card/list">
               Cartões de consoles
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="game-card-list">
-              Cartões de jogos
             </a>
           </li>
         </ul>
