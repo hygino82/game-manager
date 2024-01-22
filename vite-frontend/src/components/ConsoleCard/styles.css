@@ -1,0 +1,12 @@
+.card {
+  width: 18rem;
+}
+
+#console-card {
+  border-radius: 10px;
+  border-width: 2px;
+}
+
+img {
+  width: 150px;
+}

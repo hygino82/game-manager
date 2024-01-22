@@ -1,11 +1,13 @@
 import "bootstrap/dist/css/bootstrap.css";
 import './App.css';
-import ConsoleCardList from './routes/ConsoleCardList';
+import { Outlet } from "react-router-dom";
+import NavBar from "./components/NavBar";
 
 function App() {
   return (
     <>
-      <ConsoleCardList />
+      <NavBar />
+      <Outlet />
     </>
   )
 }
