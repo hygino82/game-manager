@@ -59,13 +59,6 @@ export default function ConsoleForm() {
     });
   }
 
-  function handleDelete(id: string | undefined) {
-    axios
-      .delete(`${BASE_URL}/console/${id}`)
-      .then(() => setAtualizar(!atualizar))
-      .catch(() => alert('Não é possível remover um console com jogos vinculados!'));
-  }
-
   return (
     <>
       <div className="container">
@@ -103,46 +96,6 @@ export default function ConsoleForm() {
           <input type="submit" value="Cadastrar" className="btn btn-success" />
         </form>
       </div>
-      <hr />
-      <hr />
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Nome</th>
-            <th scope="col">Link da imagem</th>
-            <th scope="col">Lançamento</th>
-            <th scope="col">Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          {consolePage?.content.map(item => {
-            return (
-              <tr key={item.id}>
-                <td>{item.name}</td>
-                <td>{item.imgUrl}</td>
-                <td>{item.releaseYear}</td>
-                <td>
-                  <button
-                    type="submit"
-                    onClick={() => setPlatform(item)}
-                    className="btn btn-primary"
-                  >
-                    Alterar
-                  </button>&nbsp;&nbsp;
-                  <button
-                    type="submit"
-                    onClick={() => handleDelete(item.id)}
-                    className="btn btn-danger"
-                  >
-                    Excluir
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-
-        </tbody>
-      </table>
     </>
   );
 }
