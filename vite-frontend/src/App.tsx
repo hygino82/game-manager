@@ -1,13 +1,13 @@
-import './App.css'
-import ConsoleForm from './routes/ConsoleForm'
 import "bootstrap/dist/css/bootstrap.css";
+import './App.css';
+import ConsoleCardList from './routes/ConsoleCardList';
 
 function App() {
   return (
     <>
-      <ConsoleForm />
+      <ConsoleCardList />
     </>
   )
 }
 
-export default App
+export default App;
