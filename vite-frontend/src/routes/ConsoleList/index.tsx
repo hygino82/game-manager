@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
-import { BASE_URL } from "../../utils/request";
-import { ConsolePageType, ConsoleType } from "../../types/custom-types";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { FiEdit, FiInfo, FiTrash2 } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { ConsolePageType, ConsoleType } from "../../types/custom-types";
+import { BASE_URL } from "../../utils/request";
 
 export default function ConsoleList() {
   const [consolePage, setConsolePage] = useState<ConsolePageType>();
@@ -49,21 +50,21 @@ export default function ConsoleList() {
               <td>{item.name}</td>
               <td>{item.releaseYear}</td>
               <td>
-                <Link to={`/console/${item.id}`} className="btn btn-success">Info</Link>
+                <Link to={`/console/${item.id}`} className="btn btn-success"><FiInfo /></Link>
                 &nbsp;&nbsp;
                 <button
                   type="submit"
                   onClick={() => setPlatform(item)}
                   className="btn btn-primary"
                 >
-                  Alterar
+                  <FiEdit />
                 </button>&nbsp;&nbsp;
                 <button
                   type="submit"
                   onClick={() => handleDelete(item.id)}
                   className="btn btn-danger"
                 >
-                  Excluir
+                  <FiTrash2 />
                 </button>
               </td>
             </tr>

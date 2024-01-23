@@ -24,9 +24,8 @@ export default function GameList() {
     axios
       .delete(`${BASE_URL}/game/${id}`)
       .then(() => setAtualizar(!atualizar))
-      .catch((erro) => {
+      .catch(() => {
         alert('Erro ao excluir o jogo!')
-        console.log(erro);
       });
   }
 
