@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import { FiEdit, FiInfo, FiTrash2 } from "react-icons/fi";
 import { GamePageType } from "../../types/custom-types";
 import { BASE_URL } from "../../utils/request";
+import { useParams } from "react-router-dom";
 
 export default function GameList() {
+  const { id } = useParams();
   const [pageNumber, setPageNumber] = useState(0);
   const [atualizar, setAtualizar] = useState<boolean>(true);
 
@@ -30,12 +32,22 @@ export default function GameList() {
   }
 
   useEffect(() => {
-    axios
-      .get(`${BASE_URL}/game?size=12&page=${pageNumber}`)
-      .then((response) => {
-        const data = response.data as GamePageType;
-        setPage(data);
-      });
+    if (id) {
+      axios
+        .get(`${BASE_URL}/game/console/${id}?size=12&page=${pageNumber}`)
+        .then((response) => {
+          const data = response.data as GamePageType;
+          setPage(data);
+        });
+    }
+    else {
+      axios
+        .get(`${BASE_URL}/game?size=12&page=${pageNumber}`)
+        .then((response) => {
+          const data = response.data as GamePageType;
+          setPage(data);
+        });
+    }
   }, [pageNumber, atualizar]);
 
   const handlePageChange = (newPageNumber: number) => {

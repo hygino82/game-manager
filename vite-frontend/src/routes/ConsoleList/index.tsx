@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { FiEdit, FiInfo, FiTrash2 } from "react-icons/fi";
+import { FiEdit, FiInfo, FiList, FiTrash2 } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { ConsolePageType, ConsoleType } from "../../types/custom-types";
 import { BASE_URL } from "../../utils/request";
 
 export default function ConsoleList() {
+
   const [consolePage, setConsolePage] = useState<ConsolePageType>();
 
   const [atualizar, setAtualizar] = useState<boolean>(true);
@@ -34,6 +35,10 @@ export default function ConsoleList() {
       .catch(() => alert('Não é possível remover um console com jogos vinculados!'));
   }
 
+  function handleGameListPage(id: string | undefined) {
+
+  }
+
   return (
     <table className="table table-striped">
       <thead>
@@ -50,7 +55,7 @@ export default function ConsoleList() {
               <td>{item.name}</td>
               <td>{item.releaseYear}</td>
               <td>
-                <Link to={`/console/${item.id}`} className="btn btn-success"><FiInfo /></Link>
+                <Link to={`/console/${item.id}`} className="btn btn-info"><FiInfo /></Link>
                 &nbsp;&nbsp;
                 <button
                   type="submit"
@@ -66,6 +71,8 @@ export default function ConsoleList() {
                 >
                   <FiTrash2 />
                 </button>
+                &nbsp;&nbsp;
+                <Link to={`/game/console/${item.id}`} className="btn btn-dark"><FiList /></Link>
               </td>
             </tr>
           );

@@ -49,6 +49,10 @@ const router = createBrowserRouter([
         path: "console/:id",
         element: <ConsoleCardInfo />,
       },
+      {
+        path: "game/console/:id",
+        element: <GameList />,
+      },
     ],
   },
 ]);
