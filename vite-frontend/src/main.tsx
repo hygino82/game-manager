@@ -22,10 +22,6 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "console/:id",
-        element: <ConsoleCardInfo />,
-      },
-      {
         path: "console/insert",
         element: <ConsoleForm />,
       },
@@ -48,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: "console/card/list",
         element: <ConsoleCardList />,
+      },
+      {
+        path: "console/:id",
+        element: <ConsoleCardInfo />,
       },
     ],
   },
