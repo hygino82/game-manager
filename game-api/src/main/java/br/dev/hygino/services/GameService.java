@@ -19,4 +19,6 @@ public interface GameService {
 	Page<GameDTO> findByConsoleId(Pageable pageable, String id);
 
 	ResponseEntity<?> update(String id, @Valid GameInsertDTO dto);
+
+	void remove(String id);
 }

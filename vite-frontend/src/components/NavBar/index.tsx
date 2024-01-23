@@ -23,6 +23,9 @@ export default function Navbar() {
           <li className="nav-item">
             <Link to="/console/card/list" className="nav-link">Cartões de consoles</Link>
           </li>
+          <li className="nav-item">
+            <Link to="/game/card/list" className="nav-link">Cartões de jogos</Link>
+          </li>
         </ul>
       </div>
     </nav>

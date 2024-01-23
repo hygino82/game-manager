@@ -16,6 +16,7 @@ import br.dev.hygino.entities.Console;
 import br.dev.hygino.entities.Game;
 import br.dev.hygino.repositories.ConsoleRepository;
 import br.dev.hygino.repositories.GameRepository;
+import br.dev.hygino.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 
@@ -95,4 +96,11 @@ public class GameServiceImpl implements GameService {
 		return gameEntity;
 	}
 
+	@Override
+	public void remove(String id) {
+		var game = this.gameRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Id not found: " + id));
+		this.gameRepository.delete(game);
+
+	}
 }

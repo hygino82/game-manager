@@ -8,7 +8,7 @@ export type ConsoleType = {
 };
 
 export type GameType = {
-  id?: number;
+  id?: string;
   name: string;
   releaseYear: number;
   consoleName?: string;
