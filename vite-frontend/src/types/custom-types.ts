@@ -11,7 +11,7 @@ export type GameType = {
   id?: string;
   name: string;
   releaseYear: number;
-  consoleName?: string;
+  consoleName?: string|undefined;
   consoleId?: string;
   imageUrl: string;
   personalCode?: string;

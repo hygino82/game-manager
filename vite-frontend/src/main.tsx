@@ -11,6 +11,7 @@ import GameCardList from './routes/GameCardList/index.tsx';
 import GameForm from './routes/GameForm/index.tsx';
 import GameList from './routes/GameList/index.tsx';
 import Home from './routes/Home/index.tsx';
+import GameListByConsole from './routes/GameListByConsole/index.tsx';
 
 const router = createBrowserRouter([
   {
@@ -51,7 +52,7 @@ const router = createBrowserRouter([
       },
       {
         path: "game/console/:id",
-        element: <GameList />,
+        element: <GameListByConsole />,
       },
     ],
   },
