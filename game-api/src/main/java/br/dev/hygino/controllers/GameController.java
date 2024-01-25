@@ -30,7 +30,7 @@ public class GameController {
 
 	@GetMapping
 	public ResponseEntity<Page<GameDTO>> findAll(Pageable pageable) {
-		return ResponseEntity.status(200).body(this.gameService.findAll(pageable));
+		return ResponseEntity.status(HttpStatus.OK).body(this.gameService.findAll(pageable));
 	}
 
 	@PostMapping
@@ -45,7 +45,7 @@ public class GameController {
 
 	@GetMapping("/console/{id}")
 	public ResponseEntity<Page<GameDTO>> findByConsoleId(Pageable pageable, @PathVariable String id) {
-		return ResponseEntity.status(200).body(this.gameService.findByConsoleId(pageable, id));
+		return ResponseEntity.status(HttpStatus.OK).body(this.gameService.findByConsoleId(pageable, id));
 	}
 
 	@PutMapping("/{id}")

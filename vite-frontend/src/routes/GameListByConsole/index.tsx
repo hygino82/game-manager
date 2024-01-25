@@ -5,7 +5,7 @@ import { ConsoleType, GamePageType } from "../../types/custom-types";
 import { BASE_URL } from "../../utils/request";
 import { useParams } from "react-router-dom";
 
-export default function GameListByConsole({ name }: String) {
+export default function GameListByConsole() {
   const { id } = useParams();
   const [pageNumber, setPageNumber] = useState(0);
   const [atualizar, setAtualizar] = useState<boolean>(true);
