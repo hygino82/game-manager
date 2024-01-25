@@ -2,6 +2,7 @@ package br.dev.hygino.services;
 
 import java.util.Date;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -50,7 +51,7 @@ public class GameServiceImpl implements GameService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public ResponseEntity<?> findById(String id) {
+	public ResponseEntity<?> findById(UUID id) {
 		Optional<Game> gameOptional = this.gameRepository.findById(id);
 
 		if (gameOptional.isPresent()) {
@@ -62,14 +63,14 @@ public class GameServiceImpl implements GameService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Page<GameDTO> findByConsoleId(Pageable pageable, String id) {
+	public Page<GameDTO> findByConsoleId(Pageable pageable, UUID id) {
 		Page<Game> page = this.gameRepository.findByConsoleId(pageable, id);
 		return page.map(game -> new GameDTO(game));
 	}
 
 	@Override
 	@Transactional
-	public ResponseEntity<?> update(String id, @Valid GameInsertDTO dto) {
+	public ResponseEntity<?> update(UUID id, @Valid GameInsertDTO dto) {
 		try {
 			Game gameEntity = this.gameRepository.getReferenceById(id);
 			Console consoleEntity = this.consoleRepository.findById(dto.consoleId())
@@ -97,7 +98,7 @@ public class GameServiceImpl implements GameService {
 	}
 
 	@Override
-	public void remove(String id) {
+	public void remove(UUID id) {
 		var game = this.gameRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Id not found: " + id));
 		this.gameRepository.delete(game);

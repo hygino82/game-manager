@@ -1,5 +1,7 @@
 package br.dev.hygino.services;
 
+import java.util.UUID;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +16,11 @@ public interface GameService {
 
 	ResponseEntity<?> insert(@Valid GameInsertDTO dto);
 
-	ResponseEntity<?> findById(String id);
+	ResponseEntity<?> findById(UUID id);
 
-	Page<GameDTO> findByConsoleId(Pageable pageable, String id);
+	Page<GameDTO> findByConsoleId(Pageable pageable, UUID id);
 
-	ResponseEntity<?> update(String id, @Valid GameInsertDTO dto);
+	ResponseEntity<?> update(UUID id, @Valid GameInsertDTO dto);
 
-	void remove(String id);
+	void remove(UUID id);
 }

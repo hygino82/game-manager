@@ -1,6 +1,7 @@
 package br.dev.hygino.services;
 
-import java.time.Instant;
+import java.util.Date;
+import java.util.UUID;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -44,22 +45,23 @@ public class ConsoleServiceImpl implements ConsoleService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public ResponseEntity<?> findById(String id) {
+	public ResponseEntity<?> findById(UUID id) {
 		var res = this.consoleRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
-
 		return ResponseEntity.status(HttpStatus.OK).body(new ConsoleDTO(res));
 	}
 
 	@Override
 	@Transactional
-	public ResponseEntity<?> updateById(String id, ConsoleInsertDTO dto) {
+	public ResponseEntity<?> updateById(UUID id, ConsoleInsertDTO dto) {
 		try {
 			Console entity = this.consoleRepository.getReferenceById(id);
 			entity = this.consoleRepository.save(copyDtoToEntity(dto, entity));
 			return ResponseEntity.status(HttpStatus.OK).body(new ConsoleDTO(entity));
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("Id not found: " + id);
+		} catch (IllegalArgumentException e) {
+			throw new ResourceNotFoundException("Id: " + id + " é inválido");
 		}
 	}
 
@@ -67,19 +69,20 @@ public class ConsoleServiceImpl implements ConsoleService {
 		entity.setName(dto.name());
 		entity.setReleaseYear(dto.releaseYear());
 		entity.setImgUrl(dto.imgUrl());
-		entity.setUpdatedAt(Instant.now());
+		entity.setUpdatedAt(new Date());
 		return entity;
 	}
 
 	@Override
-	public void remove(String id) {
+	public void remove(UUID id) {
 		try {
 			consoleRepository.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException("Id not found " + id);
 		} catch (DataIntegrityViolationException e) {
 			throw new DatabaseException("Integrity violation");
+		} catch (IllegalArgumentException e) {
+			throw new ResourceNotFoundException("Id: " + id + " é inválido");
 		}
 	}
-
 }

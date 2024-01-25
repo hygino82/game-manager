@@ -1,19 +1,22 @@
 package br.dev.hygino.services;
 
-import br.dev.hygino.dto.ConsoleDTO;
-import br.dev.hygino.dto.ConsoleInsertDTO;
+import java.util.UUID;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+
+import br.dev.hygino.dto.ConsoleDTO;
+import br.dev.hygino.dto.ConsoleInsertDTO;
 
 public interface ConsoleService {
     ConsoleDTO insert(ConsoleInsertDTO dto);
 
     Page<ConsoleDTO> findAll(Pageable pageable);
 
-    ResponseEntity<?> findById(String id);
+    ResponseEntity<?> findById(UUID id);
 
-    ResponseEntity<?> updateById(String id, ConsoleInsertDTO dto);
+    ResponseEntity<?> updateById(UUID id, ConsoleInsertDTO dto);
 
-    void remove(String id);
+    void remove(UUID id);
 }

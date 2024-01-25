@@ -2,16 +2,23 @@ package br.dev.hygino.entities;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 import br.dev.hygino.dto.ConsoleInsertDTO;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "tb_console")
@@ -21,10 +28,9 @@ public class Console implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
-	private String id;
+	private UUID id;
 
 	@NotBlank
-	@Size(max = 100, min = 3)
 	private String name;
 
 	@NotNull
@@ -32,8 +38,11 @@ public class Console implements Serializable {
 
 	private String imgUrl;
 
-	private Instant createdAt;
-	private Instant updatedAt;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createdAt;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date updatedAt;
 
 	@OneToMany(mappedBy = "console")
 	private List<Game> games = new ArrayList<>();
@@ -44,15 +53,15 @@ public class Console implements Serializable {
 	public Console(ConsoleInsertDTO dto) {
 		name = dto.name();
 		releaseYear = dto.releaseYear();
-		createdAt = Instant.now();
+		createdAt = new Date();
 		imgUrl = dto.imgUrl();
 	}
 
-	public String getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
@@ -80,19 +89,19 @@ public class Console implements Serializable {
 		this.imgUrl = imgUrl;
 	}
 
-	public Instant getCreatedAt() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Instant createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public Instant getUpdatedAt() {
+	public Date getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(Instant updatedAt) {
+	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 

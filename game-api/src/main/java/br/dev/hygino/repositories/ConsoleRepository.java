@@ -1,7 +1,10 @@
 package br.dev.hygino.repositories;
 
-import br.dev.hygino.entities.Console;
+import java.util.UUID;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ConsoleRepository extends JpaRepository<Console, String> {
+import br.dev.hygino.entities.Console;
+
+public interface ConsoleRepository extends JpaRepository<Console, UUID> {
 }
