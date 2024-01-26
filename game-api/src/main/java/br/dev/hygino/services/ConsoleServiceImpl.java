@@ -32,7 +32,7 @@ public class ConsoleServiceImpl implements ConsoleService {
 	@Transactional
 	public ConsoleDTO insert(ConsoleInsertDTO dto) {
 		Console entity = new Console(dto);
-		entity = this.consoleRepository.saveAndFlush(entity);
+		entity = this.consoleRepository.save(entity);
 		return new ConsoleDTO(entity);
 	}
 

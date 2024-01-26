@@ -62,7 +62,7 @@ export default function ConsoleList() {
                   onClick={() => setPlatform(item)}
                   className="btn btn-primary"
                 >
-                  <FiEdit />
+                  <Link to={`/edit/console/${item.id}`} className="btn btn-dark"><FiEdit /></Link>
                 </button>&nbsp;&nbsp;
                 <button
                   type="submit"

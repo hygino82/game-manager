@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { FiEdit, FiInfo, FiTrash2 } from "react-icons/fi";
 import { GamePageType } from "../../types/custom-types";
 import { BASE_URL } from "../../utils/request";
+import { Link } from "react-router-dom";
 
 export default function GameList() {
   const [pageNumber, setPageNumber] = useState(0);
@@ -66,7 +67,8 @@ export default function GameList() {
               >
                 <FiTrash2 />
               </button>
-              <FiInfo /> <FiEdit />
+              <Link to={`/game/${game.id}`} className="btn btn-dark"><FiInfo /></Link>
+              <FiEdit />
             </th>
           </tr>
         ))}

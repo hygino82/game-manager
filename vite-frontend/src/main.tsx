@@ -12,6 +12,8 @@ import GameForm from './routes/GameForm/index.tsx';
 import GameList from './routes/GameList/index.tsx';
 import Home from './routes/Home/index.tsx';
 import GameListByConsole from './routes/GameListByConsole/index.tsx';
+import GameCardInfo from './routes/GameCardInfo/index.tsx';
+import ConsoleFormUpdate from './routes/ConsoleFormUpdate/index.tsx';
 
 const router = createBrowserRouter([
   {
@@ -51,8 +53,16 @@ const router = createBrowserRouter([
         element: <ConsoleCardInfo />,
       },
       {
+        path: "game/:id",
+        element: <GameCardInfo />,
+      },
+      {
         path: "game/console/:id",
         element: <GameListByConsole />,
+      },
+      {
+        path: "edit/console/:id",
+        element: <ConsoleFormUpdate />,
       },
     ],
   },
