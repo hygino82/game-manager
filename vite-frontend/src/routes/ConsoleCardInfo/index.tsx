@@ -1,9 +1,11 @@
 import axios from "axios";
+import moment from "moment";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { FiEdit } from "react-icons/fi";
+import { Link, useParams } from "react-router-dom";
 import { ConsoleType } from "../../types/custom-types";
 import { BASE_URL } from "../../utils/request";
-import moment from "moment";
+import './styles.css';
 
 export default function ConsoleCardInfo(): JSX.Element {
   const { id } = useParams();
@@ -48,6 +50,7 @@ export default function ConsoleCardInfo(): JSX.Element {
 
       </div>
       <img className="card-img-top" src={consoleType.imgUrl} alt="" />
+      <Link to={`/edit/console/${id}`} className="btn btn-warning" ><FiEdit /></Link>
     </div>
   );
 }

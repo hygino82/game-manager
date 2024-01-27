@@ -14,15 +14,6 @@ export default function ConsoleFormUpdate() {
     releaseYear: 0
   })
 
-  function limparCampos() {
-    setPlatform({
-      name: '',
-      imgUrl: '',
-      releaseYear: 0,
-      id: ''
-    });
-  }
-
   function handleChange(event: any) {
     setPlatform({ ...platform, [event.target.name]: event.target.value });
   }
@@ -81,7 +72,7 @@ export default function ConsoleFormUpdate() {
               onChange={handleChange}
             />
           </div>
-          <input type="submit" value="Cadastrar" className="btn btn-success" />
+          <input type="submit" value="Alterar" className="btn btn-success" />
         </form>
       </div>
     </>

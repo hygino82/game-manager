@@ -50,6 +50,7 @@ export default function GameList() {
           <th scope="col">Name</th>
           <th scope="col">Console</th>
           <th scope="col">Release date</th>
+          <th scope="col">Personal code</th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
@@ -59,7 +60,13 @@ export default function GameList() {
             <th scope="col">{game.name}</th>
             <th scope="col">{game.consoleName}</th>
             <th scope="col">{game.releaseYear}</th>
+            <th scope="col">{game.personalCode == undefined ? '---' : game.personalCode}</th>
             <th scope="col">
+
+              <Link to={`/game/${game.id}`} className="btn btn-info"><FiInfo /></Link>
+              &nbsp;&nbsp;
+              <Link to={`/edit/game/${game.id}`} className="btn btn-warning"><FiEdit /></Link>
+              &nbsp;&nbsp;
               <button
                 type="submit"
                 onClick={() => handleDelete(game.id)}
@@ -67,8 +74,6 @@ export default function GameList() {
               >
                 <FiTrash2 />
               </button>
-              <Link to={`/game/${game.id}`} className="btn btn-dark"><FiInfo /></Link>
-              <FiEdit />
             </th>
           </tr>
         ))}

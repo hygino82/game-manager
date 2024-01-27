@@ -3,6 +3,10 @@ form {
   position: center;
   display: block;
   margin-left: 60px;
+  background-color: aquamarine;
+  border-radius: 5px;
+  padding: 4px;
+  margin-bottom: 3px;
 }
 
 #btn-salvar {

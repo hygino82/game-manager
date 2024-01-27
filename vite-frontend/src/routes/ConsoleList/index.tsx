@@ -57,13 +57,8 @@ export default function ConsoleList() {
               <td>
                 <Link to={`/console/${item.id}`} className="btn btn-info"><FiInfo /></Link>
                 &nbsp;&nbsp;
-                <button
-                  type="submit"
-                  onClick={() => setPlatform(item)}
-                  className="btn btn-primary"
-                >
-                  <Link to={`/edit/console/${item.id}`} className="btn btn-dark"><FiEdit /></Link>
-                </button>&nbsp;&nbsp;
+                <Link to={`/edit/console/${item.id}`} className="btn btn-warning"><FiEdit /></Link>
+                &nbsp;&nbsp;
                 <button
                   type="submit"
                   onClick={() => handleDelete(item.id)}
