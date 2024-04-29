@@ -43,9 +43,9 @@ public class ConsoleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(res);
     }
 
-    @DeleteMapping("{/id}")//need be fixed
-    public ResponseEntity<Void> remove(@PathVariable Long id){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> remove(@PathVariable Long id) {
         consoleService.remove(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.noContent().build();
     }
 }
