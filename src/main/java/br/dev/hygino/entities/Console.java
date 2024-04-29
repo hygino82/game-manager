@@ -40,7 +40,7 @@ public class Console implements Serializable {
     private Integer releaseYear;
 
     @Temporal(TemporalType.TIMESTAMP)
-    Date createdAt;
+    Date createAt;
 
     @Temporal(TemporalType.TIMESTAMP)
     Date updateAt;

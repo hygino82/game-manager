@@ -9,7 +9,7 @@ public record ConsoleDTO(
         String name,
         String imgUrl,
         Integer releaseYear,
-        Date createdAt,
+        Date createAt,
         Date updateAt
 ) {
     public ConsoleDTO(Console obj) {
@@ -18,7 +18,7 @@ public record ConsoleDTO(
                 obj.getName(),
                 obj.getImageUrl(),
                 obj.getReleaseYear(),
-                obj.getCreatedAt(),
+                obj.getCreateAt(),
                 obj.getUpdateAt()
         );
     }
