@@ -1,19 +1,6 @@
 package br.dev.hygino.entities;
 
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -22,13 +9,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.Date;
+
 @Entity
-@Table(name = "tb_Console")
+@Table(name = "tb_game")
 @NoArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Console implements Serializable {
+public class Game implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -48,12 +39,16 @@ public class Console implements Serializable {
     @NotNull
     private Integer releaseYear;
 
+    private String personalCode;
+
+    @ManyToOne
+    @JoinColumn(name = "console_id")
+    @NotNull
+    private Console console;
+
     @Temporal(TemporalType.TIMESTAMP)
     Date createAt;
 
     @Temporal(TemporalType.TIMESTAMP)
     Date updateAt;
-
-    @OneToMany(mappedBy = "console")
-    private List<Game> games = new ArrayList<>();
 }

@@ -1,20 +1,18 @@
 package br.dev.hygino.services;
 
-import br.dev.hygino.dtos.ConsoleDTO;
-import br.dev.hygino.dtos.InsertConsoleDTO;
-import br.dev.hygino.entities.Console;
-import br.dev.hygino.repositories.ConsoleRepository;
-import jakarta.persistence.EntityNotFoundException;
-import org.springframework.dao.DataIntegrityViolationException;
+import java.util.Date;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.HttpRequestMethodNotSupportedException;
 
-import java.time.Instant;
-import java.util.Date;
+import br.dev.hygino.dtos.ConsoleDTO;
+import br.dev.hygino.dtos.InsertConsoleDTO;
+import br.dev.hygino.entities.Console;
+import br.dev.hygino.repositories.ConsoleRepository;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class ConsoleService {
