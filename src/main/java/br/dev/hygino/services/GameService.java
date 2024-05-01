@@ -1,7 +1,9 @@
 package br.dev.hygino.services;
 
+import java.util.Date;
 import java.util.Optional;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,21 +28,10 @@ public class GameService {
         this.consoleRepository = consoleRepository;
     }
 
-    /*
-     * private Game copyDtoToEntity(Game entity, InsertGameDTO dto) {
-     * entity.setImageUrl(dto.imageUrl());
-     * entity.setName(dto.name());
-     * entity.setReleaseYear(dto.releaseYear());
-     * entity.setPersonalCode(dto.personalCode());
-     * // entity.setConsole(console);
-     * return entity;
-     * }
-     */
-
     @Transactional(readOnly = true)
     public Page<GameDTO> findAll(Pageable pageable) {
         Page<Game> page = gameRepository.findAll(pageable);
-        return page.map(game -> new GameDTO(game));
+        return page.map(GameDTO::new);
     }
 
     @Transactional
@@ -51,5 +42,31 @@ public class GameService {
         gameEntity.setConsole(consoleEntity);
         gameEntity = gameRepository.save(gameEntity);
         return new GameDTO(gameEntity);
+    }
+
+    @Transactional
+    public GameDTO updateGame(Long id, InsertGameDTO dto) {
+        Console consoleEntity = consoleRepository.findById(dto.consoleId())
+                .orElseThrow(() -> new IllegalArgumentException("Não existe Console com o Id: " + dto.consoleId()));
+        try {
+            Game gameEntity = gameRepository.getReferenceById(id);
+            copyDtoToEntity(gameEntity, dto);
+            gameEntity.setConsole(consoleEntity);
+            gameEntity.setUpdateAt(new Date());
+            gameEntity = gameRepository.save(gameEntity);
+            return new GameDTO(gameEntity);
+
+        } catch (EntityNotFoundException e) {
+            throw new IllegalArgumentException("Não existe Jogo com o id: " + id);
+        }
+    }
+
+
+    private void copyDtoToEntity(Game entity, InsertGameDTO dto) {
+        entity.setImageUrl(dto.imageUrl());
+        entity.setName(dto.name());
+        entity.setReleaseYear(dto.releaseYear());
+        entity.setPersonalCode(dto.personalCode());
+        // entity.setConsole(console);
     }
 }
