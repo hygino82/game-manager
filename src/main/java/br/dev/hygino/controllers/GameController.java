@@ -45,4 +45,10 @@ public class GameController {
         GameDTO res = gameService.findGame(id);
         return ResponseEntity.status(200).body(res);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> removeGame(@PathVariable Long id) {
+        gameService.removeGame(id);
+        return ResponseEntity.noContent().build();
+    }
 }

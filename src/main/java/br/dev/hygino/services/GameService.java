@@ -68,9 +68,14 @@ public class GameService {
         entity.setPersonalCode(dto.personalCode());
     }
 
+    @Transactional(readOnly = true)
     public GameDTO findGame(Long id) {
         Game gameEntity = gameRepository.findGame(id)
                 .orElseThrow(() -> new IllegalArgumentException("Não existe Jogo com o id: " + id));
         return new GameDTO(gameEntity);
+    }
+
+    public void removeGame(Long id) {
+        gameRepository.deleteById(id);
     }
 }
