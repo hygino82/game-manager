@@ -61,12 +61,16 @@ public class GameService {
         }
     }
 
-
     private void copyDtoToEntity(Game entity, InsertGameDTO dto) {
         entity.setImageUrl(dto.imageUrl());
         entity.setName(dto.name());
         entity.setReleaseYear(dto.releaseYear());
         entity.setPersonalCode(dto.personalCode());
-        // entity.setConsole(console);
+    }
+
+    public GameDTO findGame(Long id) {
+        Game gameEntity = gameRepository.findGame(id)
+                .orElseThrow(() -> new IllegalArgumentException("Não existe Jogo com o id: " + id));
+        return new GameDTO(gameEntity);
     }
 }

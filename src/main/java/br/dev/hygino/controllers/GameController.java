@@ -9,6 +9,8 @@ import br.dev.hygino.dtos.GameDTO;
 import br.dev.hygino.dtos.InsertGameDTO;
 import br.dev.hygino.services.GameService;
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/v1/game")
@@ -35,6 +37,12 @@ public class GameController {
     @PutMapping("/{id}")
     public ResponseEntity<GameDTO> updateGame(@PathVariable Long id, @Valid @RequestBody InsertGameDTO dto) {
         GameDTO res = gameService.updateGame(id, dto);
+        return ResponseEntity.status(200).body(res);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<GameDTO> findGame(@PathVariable Long id) {
+        GameDTO res = gameService.findGame(id);
         return ResponseEntity.status(200).body(res);
     }
 }
