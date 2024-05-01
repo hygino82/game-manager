@@ -13,12 +13,14 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
+import br.dev.hygino.dtos.InsertGameDTO;
+
 @Entity
 @Table(name = "tb_game")
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(of = "id")
 public class Game implements Serializable {
 
     @Serial
@@ -26,7 +28,6 @@ public class Game implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
     private Long id;
 
     @NotBlank
@@ -51,4 +52,12 @@ public class Game implements Serializable {
 
     @Temporal(TemporalType.TIMESTAMP)
     Date updateAt;
+
+    public Game(InsertGameDTO dto) {
+        name = dto.name();
+        imageUrl = dto.imageUrl();
+        releaseYear = dto.releaseYear();
+        personalCode = dto.personalCode();
+        createAt = new Date();
+    }
 }
