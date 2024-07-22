@@ -1,4 +1,4 @@
-package br.dev.hygino.game_manager;
+package br.dev.hygino.manager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
