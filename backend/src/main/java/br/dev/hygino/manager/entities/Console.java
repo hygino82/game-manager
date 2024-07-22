@@ -1,8 +1,9 @@
 package br.dev.hygino.manager.entities;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,14 +21,16 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
-public class Console implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class Console {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private UUID id;
 	private String name;
 	private String company;
+
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate releaseDate;
+
 	private String imageUrl;
 }
