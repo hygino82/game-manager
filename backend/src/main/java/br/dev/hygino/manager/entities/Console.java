@@ -29,7 +29,7 @@ public class Console {
 	private String name;
 	private String company;
 
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate releaseDate;
 
 	private String imageUrl;

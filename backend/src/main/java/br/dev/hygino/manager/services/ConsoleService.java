@@ -3,8 +3,10 @@ package br.dev.hygino.manager.services;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.dev.hygino.manager.dtos.ConsoleDTO;
 import br.dev.hygino.manager.dtos.RequestConsoleDTO;
@@ -19,6 +21,7 @@ public class ConsoleService {
 		this.consoleRepository = consoleRepository;
 	}
 
+	@Transactional
 	public ConsoleDTO insert(RequestConsoleDTO dto) {
 		Console entity = new Console();
 		dtoToEntity(dto, entity);
@@ -28,7 +31,7 @@ public class ConsoleService {
 	}
 
 	private void dtoToEntity(RequestConsoleDTO dto, Console entity) {
-		final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		try {
 			final LocalDate date = LocalDate.parse(dto.releaseDate(), formatter);
 			entity.setReleaseDate(date);
@@ -41,4 +44,8 @@ public class ConsoleService {
 		entity.setImageUrl(dto.imageUrl());
 	}
 
+	@Transactional(readOnly = true)
+	public List<ConsoleDTO> findAllConsoles() {
+		return consoleRepository.findAll().stream().map(ConsoleDTO::new).toList();
+	}
 }
