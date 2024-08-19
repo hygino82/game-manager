@@ -12,6 +12,11 @@ public record ConsoleDTO(
 		LocalDate releaseDate, 
 		String imageUrl) {
 	public ConsoleDTO(Console entity) {
-		this(entity.getId(), entity.getName(), entity.getCompany(), entity.getReleaseDate(), entity.getImageUrl());
+		this(
+				entity.getId(), 
+				entity.getName(), 
+				entity.getCompany(), 
+				entity.getReleaseDate(), 
+				entity.getImageUrl());
 	}
 }
