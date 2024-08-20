@@ -1,6 +1,7 @@
 package br.dev.hygino.manager.services;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -28,6 +29,7 @@ public class ConsoleService {
 	@Transactional
 	public ConsoleDTO insert(RequestConsoleDTO dto) {
 		Console entity = new Console();
+		entity.setCreateAt(LocalDateTime.now());
 		dtoToEntity(dto, entity);
 		entity = consoleRepository.save(entity);
 
@@ -65,6 +67,7 @@ public class ConsoleService {
 	public ConsoleDTO updateConsoleById(UUID id, @Valid RequestConsoleDTO dto) {
 		try {
 			Console entity = consoleRepository.getReferenceById(id);
+			entity.setUpdateAt(LocalDateTime.now());
 			dtoToEntity(dto, entity);
 			return new ConsoleDTO(consoleRepository.save(entity));
 		} catch (EntityNotFoundException ex) {

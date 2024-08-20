@@ -1,6 +1,7 @@
 package br.dev.hygino.manager.entities;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -33,4 +34,7 @@ public class Console {
 	private LocalDate releaseDate;
 
 	private String imageUrl;
+	
+	private LocalDateTime createAt;
+	private LocalDateTime updateAt;
 }
