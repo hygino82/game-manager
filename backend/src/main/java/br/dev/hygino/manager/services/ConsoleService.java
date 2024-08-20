@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.dev.hygino.manager.dtos.ConsoleDTO;
 import br.dev.hygino.manager.dtos.RequestConsoleDTO;
 import br.dev.hygino.manager.entities.Console;
+import br.dev.hygino.manager.exceptions.ResourceNotFoundException;
 import br.dev.hygino.manager.repositories.ConsoleRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
@@ -58,7 +59,7 @@ public class ConsoleService {
 	@Transactional(readOnly = true)
 	public ConsoleDTO findConsoleById(UUID id) {
 		Console entity = consoleRepository.findConsoleById(id)
-				.orElseThrow(() -> new IllegalArgumentException("Não existe console com o id: " + id));
+				.orElseThrow(() -> new ResourceNotFoundException("Não existe console com o id: " + id));
 
 		return new ConsoleDTO(entity);
 	}
@@ -71,7 +72,7 @@ public class ConsoleService {
 			dtoToEntity(dto, entity);
 			return new ConsoleDTO(consoleRepository.save(entity));
 		} catch (EntityNotFoundException ex) {
-			throw new IllegalArgumentException("Não existe console com o id: " + id);
+			throw new ResourceNotFoundException("Não existe console com o id: " + id);
 		}
 	}
 

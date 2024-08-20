@@ -11,6 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,14 +29,20 @@ public class Console {
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private UUID id;
+
+	@NotBlank
+	@Size(min = 3, max = 40)
 	private String name;
+
+	@NotBlank
+	@Size(min = 3, max = 40)
 	private String company;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate releaseDate;
 
 	private String imageUrl;
-	
+
 	private LocalDateTime createAt;
 	private LocalDateTime updateAt;
 }
