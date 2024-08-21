@@ -28,20 +28,29 @@ export function ConsoleInfo() {
   useEffect(() => buscarPorId(id));
 
   return (
-    <div className="container" id="console-card-info">
-      <h3>Nome: {obj.name}</h3>
-      <br />
-      <p>Empresa: {obj.company}</p>
-      <br />
-      <p>Data de lançamento: {formatDate(obj.releaseDate)}</p>
-      <br />
-      <p>Adicionado em: {obj.createAt}</p>
-      {obj.updateAt ? <p>Modificado em: {obj.updateAt}</p> : ""}
-      <br />
+    <div className="card" id="console-card-info">
       <img
+        className="card-img-top"
         src={obj.imageUrl}
         onError={(e) => (e.currentTarget.src = semImagem)}
       />
+      <div className="card-body">
+        <h3>Nome: {obj.name}</h3>
+        <br />
+        <p>Empresa: {obj.company}</p>
+        <br />
+        <p>Data de lançamento: {formatDate(obj.releaseDate)}</p>
+        <br />
+        <p>Adicionado em:</p>
+        <p>{obj.createAt}</p>
+        {obj.updateAt ? (
+          <div>
+            <p>Modificado em:</p>
+            <p>{obj.updateAt}</p>
+          </div>
+        ) : null}
+        <br />
+      </div>
     </div>
   );
 }

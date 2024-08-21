@@ -12,7 +12,7 @@ function GameCard({ game }: Props) {
       <div className="card-body">
         <h5 className="card-title">{game.name}</h5>
         <p className="card-text">{game.consoleName}</p>
-        <p className="card-text">{game.releaseYear}</p>
+        <p className="card-text">{game.releaseDate}</p>
       </div>
     </div>
   );
