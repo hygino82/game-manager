@@ -1,5 +1,5 @@
-export type Console = {
-  id?: number;
+export type ConsoleType = {
+  id?: string;
   name: string;
   releaseDate: string;
   imageUrl?: string;
@@ -19,7 +19,7 @@ export type Game = {
 };
 
 export type ConsolePageType = {
-  content: Console[];
+  content: ConsoleType[];
   last: boolean;
   totalPages: number;
   totalElements: number;

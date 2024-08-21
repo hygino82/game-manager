@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Console, ConsolePageType } from "../../types/custom-types";
-import { BASE_URL } from "../../utils/request";
+import { FiEdit, FiInfo, FiTrash2 } from "react-icons/fi";
+import { ConsolePageType, ConsoleType } from "../../types/custom-types";
 import { formatDate } from "../../utils/formatter";
+import { BASE_URL } from "../../utils/request";
 
 export default function ConsoleForm() {
   const [name, setName] = useState("");
@@ -13,7 +14,7 @@ export default function ConsoleForm() {
   const [consolePage, setConsolePage] = useState<ConsolePageType>();
   const [atualizar, setAtualizar] = useState<boolean>(true);
 
-  const [platform, setPlatform] = useState<Console>({
+  const [platform, setPlatform] = useState<ConsoleType>({
     name,
     imageUrl,
     releaseDate,
@@ -84,17 +85,24 @@ export default function ConsoleForm() {
     });
   }
 
-  function handleDelete(id: number | undefined) {
-    axios
-      .delete(`${BASE_URL}/console/${id}`)
-      .then(() => setAtualizar(!atualizar));
+  function handleDelete(id: string | undefined) {
+    const confirmacao = confirm("Tem certeza de que deseja excluir este item?");
+    if (confirmacao) {
+      axios
+        .delete(`${BASE_URL}/console/${id}`)
+        .then(() => setAtualizar(!atualizar));
+    }
   }
 
-  function handleAlterar(item: Console): void {
+  function handleAlterar(item: ConsoleType): void {
     setPlatform(item);
     setName(item.name);
     setCompany(item.company);
     setImageUrl(item.imageUrl || "");
+  }
+
+  function handleInfo(id: string | undefined): void {
+    alert(`${id} não implementado!`);
   }
 
   return (
@@ -141,7 +149,7 @@ export default function ConsoleForm() {
             onChange={handleChangeDate}
           />
         </div>
-        <input type="submit" value="Cadastrar" className="btn btn-success" />
+        <input type="submit" value="Salvar" className="btn btn-dark" />
       </form>
       <hr />
       <hr />
@@ -165,7 +173,7 @@ export default function ConsoleForm() {
                     onClick={() => handleAlterar(item)}
                     className="btn btn-primary"
                   >
-                    Alterar
+                    <FiEdit /> Alterar
                   </button>
                   &nbsp;&nbsp;
                   <button
@@ -173,8 +181,18 @@ export default function ConsoleForm() {
                     onClick={() => handleDelete(item.id)}
                     className="btn btn-danger"
                   >
-                    Excluir
+                    <FiTrash2 /> Excluir
                   </button>
+                  &nbsp;&nbsp;
+                  <a href={`http://localhost:5173/console/${item.id}`}>
+                    <button
+                      type="button"
+                      //onClick={() => handleInfo(item.id)}
+                      className="btn btn-success"
+                    >
+                      <FiInfo /> Informação
+                    </button>
+                  </a>
                 </td>
               </tr>
             );

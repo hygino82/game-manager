@@ -6,10 +6,10 @@ import GameCardList from "./components/GameCardList";
 import GameTable from "./components/GameTable";
 import "./index.css";
 import ConsoleForm from "./routes/ConsoleForm";
+import { ConsoleInfo } from "./routes/ConsoleInfo";
 import ConsoleList from "./routes/ConsoleList";
 import GameInsertForm from "./routes/GameInsertForm";
 import Home from "./routes/Home";
-
 
 const router = createBrowserRouter([
   {
@@ -39,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/console-form",
         element: <ConsoleForm />,
+      },
+      {
+        path: "/console/:id",
+        element: <ConsoleInfo />,
       },
     ],
   },
