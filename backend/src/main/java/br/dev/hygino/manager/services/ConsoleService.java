@@ -4,10 +4,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,8 +53,8 @@ public class ConsoleService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<ConsoleDTO> findAllConsoles() {
-		return consoleRepository.findAll().stream().map(ConsoleDTO::new).toList();
+	public Page<ConsoleDTO> findAllConsoles(Pageable pageable) {
+		return consoleRepository.findAll(pageable).map(ConsoleDTO::new);
 	}
 
 	@Transactional(readOnly = true)

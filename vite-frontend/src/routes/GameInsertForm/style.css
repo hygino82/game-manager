@@ -1,0 +1,16 @@
+#insert-form {
+  width: 320px;
+  height: 400px;
+  background-color: rgb(146, 225, 56);
+  border-radius: 5px;
+  text-align: center;
+}
+
+input,
+select,
+button,
+option,
+p,
+h3 {
+  color: black;
+}

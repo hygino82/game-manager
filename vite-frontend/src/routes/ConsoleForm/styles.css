@@ -1,0 +1,10 @@
+form {
+    width: 30em;
+    position: center;
+    display: block;
+    margin-left: 60px;
+}
+
+#btn-salvar {
+    margin-left: 10px;
+}

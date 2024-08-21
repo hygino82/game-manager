@@ -1,8 +1,9 @@
 package br.dev.hygino.manager.controlers;
 
-import java.util.List;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,9 +36,9 @@ public class ConsoleController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<ConsoleDTO>> findAllConsoles() {
-		final List<ConsoleDTO> list = consoleService.findAllConsoles();
-		return ResponseEntity.status(HttpStatus.OK).body(list);
+	public ResponseEntity<Page<ConsoleDTO>> findAllConsoles(Pageable pageable) {
+		final Page<ConsoleDTO> page = consoleService.findAllConsoles(pageable);
+		return ResponseEntity.status(HttpStatus.OK).body(page);
 	}
 
 	@GetMapping("/{id}")
@@ -47,15 +48,14 @@ public class ConsoleController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<ConsoleDTO> updateConsoleById(
-			@PathVariable UUID id,
+	public ResponseEntity<ConsoleDTO> updateConsoleById(@PathVariable UUID id,
 			@Valid @RequestBody RequestConsoleDTO dto) {
 		final ConsoleDTO res = consoleService.updateConsoleById(id, dto);
 		return ResponseEntity.status(HttpStatus.OK).body(res);
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> removeConsoleById(@PathVariable UUID id){
+	public ResponseEntity<Void> removeConsoleById(@PathVariable UUID id) {
 		consoleService.removeConsoleById(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
