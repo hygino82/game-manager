@@ -84,4 +84,16 @@ public class ConsoleService {
 			new IllegalArgumentException("Erro Console com jogos associados!");
 		}
 	}
+
+	@Transactional
+	public ConsoleDTO updateImageUrlById(UUID id, String imageUrl) {
+		try {
+			Console entity = consoleRepository.getReferenceById(id);
+			entity.setUpdateAt(LocalDateTime.now());
+			entity.setImageUrl(imageUrl);
+			return new ConsoleDTO(consoleRepository.save(entity));
+		} catch (EntityNotFoundException ex) {
+			throw new ResourceNotFoundException("Não existe console com o id: " + id);
+		}
+	}
 }
