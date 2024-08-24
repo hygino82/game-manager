@@ -1,4 +1,4 @@
-package br.dev.hygino.manager.controlers;
+package br.dev.hygino.manager.controllers;
 
 import java.util.UUID;
 

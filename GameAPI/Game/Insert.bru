@@ -1,0 +1,21 @@
+meta {
+  name: Insert
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/api/v1/game
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Gran Turismo 2",
+    "releaseDate": "1999-12-11",
+    "personalCode": "gt2 psx",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/pt/6/6e/Gran_Turismo_2_capa.png",
+    "consoleId": "7f2d1a58-9e44-4d6d-8f2d-1a589e449d6d"
+  }
+}
