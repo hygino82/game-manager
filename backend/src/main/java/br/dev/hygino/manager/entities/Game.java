@@ -1,18 +1,13 @@
 package br.dev.hygino.manager.entities;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import lombok.*;
 
 @Entity
 @Table(name = "tb_game")
@@ -31,7 +26,6 @@ public class Game {
     private String name;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull
     private LocalDate releaseDate;
 
     @NotBlank

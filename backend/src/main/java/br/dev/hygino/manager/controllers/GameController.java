@@ -15,35 +15,35 @@ import java.util.UUID;
 @RestController
 @RequestMapping("api/v1/game")
 public class GameController {
-    private final GameService service;
+	private final GameService service;
 
-    public GameController(GameService service) {
-        this.service = service;
-    }
+	public GameController(GameService service) {
+		this.service = service;
+	}
 
-    @PostMapping
-    public ResponseEntity<GameDTO> insertGame(@Valid RequestGameDTO dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.insertGame(dto));
-    }
+	@PostMapping
+	public ResponseEntity<GameDTO> insertGame(@RequestBody @Valid RequestGameDTO dto) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(service.insertGame(dto));
+	}
 
-    @GetMapping
-    public ResponseEntity<Page<GameDTO>> findAllGames(Pageable pageable) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.findAllGames(pageable));
-    }
+	@GetMapping
+	public ResponseEntity<Page<GameDTO>> findAllGames(Pageable pageable) {
+		return ResponseEntity.status(HttpStatus.OK).body(service.findAllGames(pageable));
+	}
 
-    @GetMapping("/{id}")
-    public ResponseEntity<GameDTO> findGameById(@PathVariable UUID id) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.findGameById(id));
-    }
+	@GetMapping("/{id}")
+	public ResponseEntity<GameDTO> findGameById(@PathVariable UUID id) {
+		return ResponseEntity.status(HttpStatus.OK).body(service.findGameById(id));
+	}
 
-    @PutMapping("/{id}")
-    public ResponseEntity<GameDTO> updateGameById(@PathVariable UUID id, @Valid RequestGameDTO dto) {
-        return ResponseEntity.status(HttpStatus.OK).body(service.updateGameById(id, dto));
-    }
+	@PutMapping("/{id}")
+	public ResponseEntity<GameDTO> updateGameById(@PathVariable UUID id, @Valid RequestGameDTO dto) {
+		return ResponseEntity.status(HttpStatus.OK).body(service.updateGameById(id, dto));
+	}
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> removeGameById(@PathVariable UUID id) {
-        service.removeGameById(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> removeGameById(@PathVariable UUID id) {
+		service.removeGameById(id);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+	}
 }
