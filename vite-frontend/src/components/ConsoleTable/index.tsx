@@ -22,7 +22,7 @@ function ConsoleTable() {
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/console?size=15&page=${pageNumber}`)
+      .get(`${BASE_URL}/console?size=15&page=${pageNumber}&sort=name`)
       .then((response) => {
         const data = response.data as ConsolePageType;
         setPage(data);

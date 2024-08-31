@@ -66,7 +66,7 @@ export default function ConsoleForm() {
         });
     } else {
       console.log(`Registro criado`);
-      axios.post(`${BASE_URL}/console`, updatedPlatform).then((result) => {
+      axios.post(`${BASE_URL}/console?sort=name`, updatedPlatform).then((result) => {
         setPlatform(result.data);
         setAtualizar(!atualizar);
       });
