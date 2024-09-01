@@ -16,5 +16,4 @@ public interface ConsoleRepository extends JpaRepository<Console, UUID> {
 			SELECT obj FROM Console obj WHERE obj.id =?1
 			""")
 	Optional<Console> findConsoleById(UUID id);
-
 }

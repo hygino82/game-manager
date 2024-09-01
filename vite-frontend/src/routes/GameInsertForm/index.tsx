@@ -1,16 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Console, Game } from "../../types/custom-types";
+import { ConsoleType, Game } from "../../types/custom-types";
 import { BASE_URL } from "../../utils/request";
 import "./style.css";
 
 function GameInsertForm() {
   const [nome, setNome] = useState<string>("");
-  const [ano, setAno] = useState<number>(2010);
+  const [dataLancamento, setDataLancamento] = useState<string>('');
   const [imagem, setImagem] = useState<string>("");
   const [consoleId, setConsoleId] = useState<number>(7);
   const [personalCode, setPersonalCode] = useState<string>("");
-  const [consoleList, setConsoleList] = useState<Console[]>([]);
+  const [consoleList, setConsoleList] = useState<ConsoleType[]>([]);
 
   function getConsoleId(e: any) {
     e.preventDefault();
@@ -20,7 +20,7 @@ function GameInsertForm() {
   function inserir() {
     const jogo: Game = {
       name: nome,
-      releaseYear: ano,
+      releaseDate: dataLancamento,
       imageUrl: imagem,
       consoleId: consoleId,
       personalCode: personalCode,
@@ -31,7 +31,7 @@ function GameInsertForm() {
     axios
       .post(`${BASE_URL}/game`, {
         name: nome,
-        releaseYear: ano,
+        releaseYear: dataLancamento,
         imageUrl: imagem,
         consoleId: consoleId,
         personalCode: personalCode,
@@ -42,7 +42,7 @@ function GameInsertForm() {
         setImagem('');
         setNome('');
         setPersonalCode('');
-        setAno(2010);
+        setDataLancamento('2010-07-05');
       })
       .catch(function (error) {
         console.log(error);
@@ -52,7 +52,7 @@ function GameInsertForm() {
 
   useEffect(() => {
     axios.get(`${BASE_URL}/console`).then((response) => {
-      const data = response.data.content as Console[];
+      const data = response.data.content as ConsoleType[];
       setConsoleList(data);
     });
   }, []);
@@ -74,8 +74,8 @@ function GameInsertForm() {
         type="number"
         name="gameYear"
         id="gameYear"
-        value={ano}
-        onChange={(f) => setAno(Number(f.target.value))}
+        value={dataLancamento}
+        onChange={(f) => setDataLancamento(f.target.value)}
       />
       <p>Link da imagem</p>
       <input
