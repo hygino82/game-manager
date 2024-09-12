@@ -22,7 +22,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
-public class Console {
+public final class Console {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

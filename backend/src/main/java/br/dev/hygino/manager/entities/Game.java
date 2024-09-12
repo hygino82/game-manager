@@ -15,7 +15,7 @@ import lombok.*;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
-public class Game {
+public final class Game {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

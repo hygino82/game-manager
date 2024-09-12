@@ -7,7 +7,9 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.UUID;
 
+import br.dev.hygino.manager.dtos.UpdateConsoleDTO;
 import br.dev.hygino.manager.exceptions.DataBaseException;
+import br.dev.hygino.manager.mapstruct.ConsoleUpdateMapper;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,9 +27,11 @@ import jakarta.validation.Valid;
 @Service
 public class ConsoleService {
     private final ConsoleRepository consoleRepository;
+    private final ConsoleUpdateMapper consoleUpdate;
 
-    public ConsoleService(ConsoleRepository consoleRepository) {
+    public ConsoleService(ConsoleRepository consoleRepository, ConsoleUpdateMapper consoleUpdate) {
         this.consoleRepository = consoleRepository;
+        this.consoleUpdate = consoleUpdate;
     }
 
     @Transactional
@@ -68,11 +72,11 @@ public class ConsoleService {
     }
 
     @Transactional
-    public ConsoleDTO updateConsoleById(UUID id, @Valid RequestConsoleDTO dto) {
+    public ConsoleDTO updateConsoleById(UUID id, @Valid UpdateConsoleDTO dto) {
         try {
             Console entity = consoleRepository.getReferenceById(id);
             entity.setUpdateAt(LocalDateTime.now());
-            dtoToEntity(dto, entity);
+            consoleUpdate.updateConsole(dto, entity);
             return new ConsoleDTO(consoleRepository.save(entity));
         } catch (EntityNotFoundException ex) {
             throw new ResourceNotFoundException("Não existe console com o id: " + id);

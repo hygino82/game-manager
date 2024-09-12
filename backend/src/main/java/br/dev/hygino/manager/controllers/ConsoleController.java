@@ -3,6 +3,7 @@ package br.dev.hygino.manager.controllers;
 import java.util.List;
 import java.util.UUID;
 
+import br.dev.hygino.manager.dtos.UpdateConsoleDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -26,54 +27,54 @@ import jakarta.validation.constraints.NotBlank;
 @RestController
 @RequestMapping("api/v1/console")
 public class ConsoleController {
-	private final ConsoleService consoleService;
+    private final ConsoleService consoleService;
 
-	public ConsoleController(ConsoleService consoleService) {
-		this.consoleService = consoleService;
-	}
+    public ConsoleController(ConsoleService consoleService) {
+        this.consoleService = consoleService;
+    }
 
-	@PostMapping
-	public ResponseEntity<ConsoleDTO> insert(@Valid @RequestBody RequestConsoleDTO dto) {
-		final var res = consoleService.insert(dto);
-		return ResponseEntity.status(HttpStatus.CREATED).body(res);
-	}
+    @PostMapping
+    public ResponseEntity<ConsoleDTO> insert(@Valid @RequestBody RequestConsoleDTO dto) {
+        final var res = consoleService.insert(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(res);
+    }
 
-	@GetMapping
-	public ResponseEntity<Page<ConsoleDTO>> findAllConsoles(Pageable pageable) {
-		final Page<ConsoleDTO> page = consoleService.findAllConsoles(pageable);
-		return ResponseEntity.status(HttpStatus.OK).body(page);
-	}
-	
-	@GetMapping("/list")
-	public ResponseEntity<List<ConsoleDTO>> listAllConsoles() {
-		final List<ConsoleDTO> list = consoleService.listAllConsoles();
-		return ResponseEntity.status(HttpStatus.OK).body(list);
-	}
+    @GetMapping
+    public ResponseEntity<Page<ConsoleDTO>> findAllConsoles(Pageable pageable) {
+        final Page<ConsoleDTO> page = consoleService.findAllConsoles(pageable);
+        return ResponseEntity.status(HttpStatus.OK).body(page);
+    }
 
-	@GetMapping("/{id}")
-	public ResponseEntity<ConsoleDTO> findConsoleById(@PathVariable UUID id) {
-		final ConsoleDTO res = consoleService.findConsoleById(id);
-		return ResponseEntity.status(HttpStatus.OK).body(res);
-	}
+    @GetMapping("/list")
+    public ResponseEntity<List<ConsoleDTO>> listAllConsoles() {
+        final List<ConsoleDTO> list = consoleService.listAllConsoles();
+        return ResponseEntity.status(HttpStatus.OK).body(list);
+    }
 
-	@PutMapping("/{id}")
-	public ResponseEntity<ConsoleDTO> updateConsoleById(@PathVariable UUID id,
-			@Valid @RequestBody RequestConsoleDTO dto) {
-		final ConsoleDTO res = consoleService.updateConsoleById(id, dto);
-		return ResponseEntity.status(HttpStatus.OK).body(res);
-	}
+    @GetMapping("/{id}")
+    public ResponseEntity<ConsoleDTO> findConsoleById(@PathVariable UUID id) {
+        final ConsoleDTO res = consoleService.findConsoleById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(res);
+    }
 
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> removeConsoleById(@PathVariable UUID id) {
-		consoleService.removeConsoleById(id);
-		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-	}
+    @PutMapping("/{id}")
+    public ResponseEntity<ConsoleDTO> updateConsoleById(@PathVariable UUID id,
+                                                        @Valid @RequestBody UpdateConsoleDTO dto) {
+        final ConsoleDTO res = consoleService.updateConsoleById(id, dto);
+        return ResponseEntity.status(HttpStatus.OK).body(res);
+    }
 
-	@PatchMapping("/{id}")
-	public ResponseEntity<ConsoleDTO> updateImageUrlById(
-			@PathVariable UUID id,
-			@RequestBody @NotBlank String imageUrl) {
-		final ConsoleDTO res = consoleService.updateImageUrlById(id, imageUrl);
-		return ResponseEntity.status(HttpStatus.OK).body(res);
-	}
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> removeConsoleById(@PathVariable UUID id) {
+        consoleService.removeConsoleById(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<ConsoleDTO> updateImageUrlById(
+            @PathVariable UUID id,
+            @RequestBody @NotBlank String imageUrl) {
+        final ConsoleDTO res = consoleService.updateImageUrlById(id, imageUrl);
+        return ResponseEntity.status(HttpStatus.OK).body(res);
+    }
 }
