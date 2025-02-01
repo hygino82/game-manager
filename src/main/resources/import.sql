@@ -1,0 +1,10 @@
+insert into tb_console(nome, ano_lancamento,full_hd,regiao,tipo_controle) values('Atari 2600',1977, false,1,0);
+insert into tb_console(nome, ano_lancamento,full_hd,regiao,tipo_controle) values('Nintendo',1983, false,2,0);
+insert into tb_console(nome, ano_lancamento,full_hd,regiao,tipo_controle) values('Super Nintendo',1990, false,2,0);
+insert into tb_console(nome, ano_lancamento,full_hd,regiao,tipo_controle) values('Nintendo 64',1996, false,2,0);
+insert into tb_console(nome, ano_lancamento,full_hd,regiao,tipo_controle) values('Genesis',1989, false,0,0);
+insert into tb_console(nome, ano_lancamento,full_hd,regiao,tipo_controle) values('Saturn',1995, false,0,0);
+insert into tb_console(nome, ano_lancamento,full_hd,regiao,tipo_controle) values('PlayStation',1994, true,2,0);
+insert into tb_console(nome, ano_lancamento,full_hd,regiao,tipo_controle) values('PlayStation 3',2006, true,2,1);
+insert into tb_console(nome, ano_lancamento,full_hd,regiao,tipo_controle) values('XBOX 360',2005, true,1,1);
+insert into tb_console(nome, ano_lancamento,full_hd,regiao,tipo_controle) values('XBOX One',2013, false,0,1);
