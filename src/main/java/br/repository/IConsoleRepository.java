@@ -3,6 +3,7 @@ package br.repository;
 import br.model.Console;
 import java.util.List;
 import java.util.Optional;
+import javax.validation.constraints.NotNull;
 
 public interface IConsoleRepository {
 
@@ -10,8 +11,9 @@ public interface IConsoleRepository {
 
     Console save(Console entity);
 
-    Optional< Console> findById(long id);
+    Optional<Console> findById(long id);
 
-    // void removeConsoleById(long id);
-    //void updateConsole(long id, @NotNull RequestConsoleDTO dto);
+    boolean removeConsoleById(long id);
+
+    Console updateConsole(long id, @NotNull Console entity);
 }

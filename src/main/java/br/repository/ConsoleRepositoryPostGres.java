@@ -87,4 +87,42 @@ public class ConsoleRepositoryPostGres implements IConsoleRepository {
             throw new DatabaseException("Erro ao encontrar console por ID!: " + e);
         }
     }
+
+    @Override
+    public boolean removeConsoleById(long id) {
+        final String query = "DELETE FROM console WHERE id = ?";
+        try (Connection conn = PostgresConfig.getConnection()) {
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setLong(1, id);
+                int rowsAffected = stmt.executeUpdate();
+                if (rowsAffected == 0) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao remover console por ID: " + e.getMessage());
+            throw new DatabaseException("Erro ao remover console por ID!: " + e);
+        }
+    }
+
+    @Override
+    public Console updateConsole(long id, Console entity) {
+        final String query = "UPDATE console SET name = ?, company = ?, release_date = ?, image_url = ? WHERE id = ?";
+        try (Connection conn = PostgresConfig.getConnection()) {
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setString(1, entity.getName());
+                stmt.setString(2, entity.getCompany());
+                stmt.setDate(3, java.sql.Date.valueOf(entity.getReleaseDate()));
+                stmt.setString(4, entity.getImageUrl());
+                stmt.setLong(5, id);
+                stmt.executeUpdate();
+                return entity;
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao atualizar console: " + e.getMessage());
+            throw new DatabaseException("Erro ao atualizar console!: " + e);
+        }
+    }
 }

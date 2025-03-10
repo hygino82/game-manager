@@ -8,8 +8,10 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -55,7 +57,18 @@ public class ConsoleResource {
         }
     }
 
-    /*@PUT
+    @DELETE
+    @Path("/{id}")
+    public Response removeConsoleById(@PathParam("id") long id) {
+        final var res = service.removeConsoleById(id);
+        if (res) {
+            return Response.status(Response.Status.NO_CONTENT).build();
+        }
+
+        return Response.status(Response.Status.NOT_FOUND).entity("Console não encontrado!").build();
+    }
+
+    @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -67,12 +80,4 @@ public class ConsoleResource {
             return Response.status(Response.Status.BAD_REQUEST).entity(ex.getMessage()).build();
         }
     }
-
-    
-    
-    @DELETE
-    @Path("/{id}")
-    public void removeConsoleById(@PathParam("id") long id){
-        service.removeConsoleById(id);
-    }*/
 }

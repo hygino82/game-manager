@@ -40,27 +40,14 @@ public class ConsoleService {
         return res.get();
     }
 
-    /*public Console updateConsole(long id, RequestConsoleDTO dto) {
-        Optional<Console> res = repository.getGamelist().stream().filter(e -> e.getId() == id).findFirst();
-
-        if (res.isEmpty()) {
-            throw new ConsoleNotFoundException("Não existe Console com o id: " + id);
-        }
-
-        Console entity = res.get();
-        dtoToEntity(dto, entity);
-
-        return repository.save(entity);
+    public boolean removeConsoleById(long id) {
+        return dbRepository.removeConsoleById(id);
     }
 
-    private void dtoToEntity(RequestConsoleDTO dto, Console entity) {
-        entity.setName(dto.getName());
-        entity.setCompany(dto.getCompany());
-        entity.setReleaseDate(dto.getReleaseDate());
-        entity.setImageUrl(dto.getImageUrl());
-    }
+    public Console updateConsole(long id, RequestConsoleDTO dto) {
+        Console entity = mapper.map(dto, Console.class);
+        entity.setId(id);
 
-    public void removeConsoleById(long id) {
-        repository.removeConsoleById(id);
-    }*/
+        return dbRepository.updateConsole(id, entity);
+    }
 }
