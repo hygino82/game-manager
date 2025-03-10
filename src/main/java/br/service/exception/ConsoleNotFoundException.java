@@ -1,4 +1,4 @@
-package br.service;
+package br.service.exception;
 
 public final class ConsoleNotFoundException extends RuntimeException {
 

@@ -12,7 +12,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>11</maven.compiler.release>
-        <jakartaee-api.version>9.0.0</jakartaee-api.version>
+        <jakartaee-api.version>9.1.0</jakartaee-api.version>
         <payara.version>5.2022.2</payara.version>
         <cargo.version>1.10.13</cargo.version>
         <payara.url>https://repo1.maven.org/maven2/fish/payara/distributions/payara/5.2022.2/payara-5.2022.2.zip</payara.url>
@@ -53,6 +53,17 @@
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
             <version>3.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>2.9.0</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
 

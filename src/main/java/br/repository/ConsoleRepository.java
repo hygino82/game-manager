@@ -11,9 +11,9 @@ public final class ConsoleRepository {
     private ConsoleRepository() {
         gamelist = new ArrayList<>();
         gamelist.addAll(Arrays.asList(
-                new Console(1L, "Atari 2600", "Atari", LocalDate.of(1977, 9, 11), "URL"),
-                new Console(2L, "Mega Drive", "SEGA", LocalDate.of(1988, 10, 29), "URL"),
-                new Console(3L, "Super Nintendo", "Nintendo", LocalDate.of(1990, 11, 21), "URL")
+                new Console(1L, "Atari 2600", "Atari", LocalDate.of(1977, 9, 11), "https://pt.wikipedia.org/wiki/Atari_2600#/media/Ficheiro:Atari-2600-Wood-4Sw-Set.png"),
+                new Console(2L, "Mega Drive", "SEGA", LocalDate.of(1988, 10, 29), "https://pt.wikipedia.org/wiki/Mega_Drive#/media/Ficheiro:Sega-Mega-Drive-JP-Mk1-Console-Set.jpg"),
+                new Console(3L, "Super Nintendo", "Nintendo", LocalDate.of(1990, 11, 21), "https://pt.wikipedia.org/wiki/Super_Nintendo_Entertainment_System#/media/Ficheiro:SNES-Mod1-Console-Set.jpg")
         ));
     }
 
@@ -38,5 +38,9 @@ public final class ConsoleRepository {
         }
         gamelist.add(entity);
         return entity;
+    }
+
+    public void removeConsoleById(long id) {
+        gamelist.removeIf(console -> console.getId() == id);
     }
 }
