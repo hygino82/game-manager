@@ -1,0 +1,20 @@
+meta {
+  name: Insert console
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{host}}/console
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "PlayStation 4",
+    "company": "Sony",
+    "releaseDate": "2013-11-15",
+    "imageUrl": "https://pt.wikipedia.org/wiki/PlayStation_4#/media/Ficheiro:Sony-PlayStation-4-PS4-wDualShock-4.jpg"
+  }
+}

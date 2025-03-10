@@ -35,7 +35,7 @@
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
-                    <scope>provided</scope>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.eclipse.microprofile</groupId>
@@ -44,11 +44,16 @@
             <type>pom</type>
         </dependency>
         <dependency>
-		<groupId>org.projectlombok</groupId>
-		<artifactId>lombok</artifactId>
-		<version>1.18.36</version>
-		<scope>provided</scope>
-	</dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.36</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>3.1.1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -68,17 +73,17 @@
             </plugin>
             <!-- Execute 'mvn clean package cargo:run' to run the application. -->
             <plugin>
-                    <groupId>org.codehaus.cargo</groupId>
-                    <artifactId>cargo-maven3-plugin</artifactId>
-                    <version>${cargo.version}</version>
-                    <configuration>
-                        <container>
-                            <containerId>payara</containerId>
-                            <zipUrlInstaller>
-                                <url>${payara.url}</url>
-                            </zipUrlInstaller>
-                        </container>
-                    </configuration>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven3-plugin</artifactId>
+                <version>${cargo.version}</version>
+                <configuration>
+                    <container>
+                        <containerId>payara</containerId>
+                        <zipUrlInstaller>
+                            <url>${payara.url}</url>
+                        </zipUrlInstaller>
+                    </container>
+                </configuration>
             </plugin>
         </plugins>
     </build>
