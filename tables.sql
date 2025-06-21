@@ -1,0 +1,6 @@
+CREATE TABLE console (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    company VARCHAR(100) NOT NULL,
+    releaseDate DATE NOT NULL
+);
