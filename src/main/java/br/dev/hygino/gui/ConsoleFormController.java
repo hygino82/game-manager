@@ -1,5 +1,6 @@
 package br.dev.hygino.gui;
 
+import java.util.List;
 
 import br.dev.hygino.dao.ConsoleDAO;
 import br.dev.hygino.model.Console;
@@ -7,9 +8,8 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-
-import java.time.LocalDate;
 
 public class ConsoleFormController {
 
@@ -28,6 +28,12 @@ public class ConsoleFormController {
     private Button btnAdd;
 
     @FXML
+    private Button btnList;
+
+    @FXML
+    private ListView<Console> listView = new ListView<>();
+
+    @FXML
     public void addConsole(Event event) {
         if (txtName.getText().isEmpty() || txtCompany.getText().isEmpty() || dtReleaseDate.getValue() == null) {
             System.out.println("Preencha todos os campos!");
@@ -39,5 +45,13 @@ public class ConsoleFormController {
         dao = ConsoleDAO.getInstance();
         dao.insert(console);
         System.out.println(console);
+    }
+
+    @FXML
+    public void getConsoleList(Event event) {
+        dao = ConsoleDAO.getInstance();
+        final List<Console> list = dao.getConsoleList();
+        // list.forEach(System.out::println);
+        listView.getItems().addAll(list);
     }
 }

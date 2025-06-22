@@ -1,9 +1,10 @@
 package br.dev.hygino.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Console {
-    
+
     private int id;
     private String name;
     private String company;
@@ -59,6 +60,7 @@ public class Console {
 
     @Override
     public String toString() {
-        return "Console{" + "id=" + id + ", name=" + name + ", company=" + company + ", releaseDate=" + releaseDate + '}';
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return id + ", " + name + ", " + company + ", " + releaseDate.format(formatter);
     }
 }
