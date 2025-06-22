@@ -29,12 +29,13 @@ public class ConsoleDAO {
             stmt.setString(2, c.getCompany());
             stmt.setDate(3, Date.valueOf(c.getReleaseDate()));
             stmt.executeUpdate();
+
+            //System.out.println("Console Inserido");
         } catch (SQLException e) {
-            //System.out.println(e.getMessage());
+            // System.out.println(e.getMessage());
             System.out.println("Ocorreu um erro ao inserir o console.");
             e.printStackTrace();
         }
-        System.out.println("Terminou");
     }
 
     public List<Console> getConsoleList() {
@@ -50,8 +51,7 @@ public class ConsoleDAO {
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("company"),
-                        rs.getDate("releaseDate").toLocalDate()
-                );
+                        rs.getDate("releaseDate").toLocalDate());
                 consoleList.add(c);
             }
         } catch (SQLException e) {
@@ -72,6 +72,8 @@ public class ConsoleDAO {
             stmt.setDate(3, Date.valueOf(c.getReleaseDate())); // LocalDate para java.sql.Date
             stmt.setInt(4, c.getId());
             stmt.executeUpdate();
+
+            //System.out.println("Console Atualizado");
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Erro ao atualizar o console.");
